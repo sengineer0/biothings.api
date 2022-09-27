@@ -4,6 +4,7 @@ In general, do not include utils depending on any third-party modules.
 """
 import asyncio
 import base64
+import concurrent.futures
 import glob
 import gzip
 import hashlib
@@ -877,3 +878,20 @@ def merge(x, dx):
         else:
             x[k] = v
     return x
+
+
+
+def get_loop():
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    return loop
+
+
+def get_loop_with_max_workers(max_workers=None):
+    loop = get_loop()
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=max_workers)
+    loop.set_default_executor(executor)
+    return loop

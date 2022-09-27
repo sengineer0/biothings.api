@@ -1,4 +1,8 @@
-from biothings.utils.common import merge
+import warnings
+from concurrent.futures import ThreadPoolExecutor
+
+from biothings.utils.common import get_loop_with_max_workers, merge
+
 
 def test_merge_0():
     x = {}
@@ -57,6 +61,20 @@ def test_merge_5():
     print(x)
 
 
+def test_get_loop():
+    warnings.filterwarnings("default", category=DeprecationWarning)
+
+    # Given
+    max_workers = 2
+
+    # Action
+    loop = get_loop_with_max_workers(max_workers=max_workers)
+
+    # Asserts
+    assert isinstance(loop._default_executor, ThreadPoolExecutor)
+    assert loop._default_executor._max_workers == max_workers
+
+
 if __name__ == '__main__':
     test_merge_0()
     test_merge_1()
@@ -64,6 +82,8 @@ if __name__ == '__main__':
     test_merge_3()
     test_merge_4()
     test_merge_5()
+    test_get_loop()
+
 
 # ANS
 # {}
