@@ -62,7 +62,7 @@ def test_merge_5():
 
 
 def test_get_loop():
-    warnings.filterwarnings("default", category=DeprecationWarning)
+    warnings.filterwarnings("ignore", category=DeprecationWarning)
 
     # Given
     max_workers = 2
