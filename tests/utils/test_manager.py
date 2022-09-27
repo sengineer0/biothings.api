@@ -1,4 +1,3 @@
-import warnings
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 
 from biothings.utils.manager import JobManager
@@ -7,8 +6,6 @@ from biothings.utils.common import get_loop
 
 class TestJobManager():
     def test_init_with_default_executor(self):
-        warnings.filterwarnings("ignore", category=DeprecationWarning)
-
         # Given
         loop = get_loop()
 

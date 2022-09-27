@@ -1,4 +1,3 @@
-import warnings
 from concurrent.futures import ThreadPoolExecutor
 
 from biothings.utils.common import get_loop_with_max_workers, merge
@@ -62,8 +61,6 @@ def test_merge_5():
 
 
 def test_get_loop():
-    warnings.filterwarnings("ignore", category=DeprecationWarning)
-
     # Given
     max_workers = 2
 

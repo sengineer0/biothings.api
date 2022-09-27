@@ -21,6 +21,7 @@ import string
 import sys
 import time
 import types
+import warnings
 from collections import UserDict, UserList
 from contextlib import contextmanager
 from datetime import date, datetime, timezone
@@ -882,6 +883,7 @@ def merge(x, dx):
 
 
 def get_loop():
+    warnings.filterwarnings("ignore", category=DeprecationWarning)
     try:
         loop = asyncio.get_event_loop()
     except RuntimeError:
